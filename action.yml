@@ -1,0 +1,24 @@
+name: 'setup-bb'
+description: 'Setup BuildBeaver CLI, bb, on GitHub Actions runners'
+author: 'BuildBeaver'
+branding:
+  color: 'green'
+  icon: 'package'
+
+inputs:
+  version:
+    description: 'Version of BuildBeaver CLI to install'
+    required: false
+    default: 1.0.0
+  install-only:
+    description: 'Only install bb CLI onto runners PATH'
+    required: false
+    default: false
+  args:
+    description: 'Arguments to pass to bb CLI'
+    default: ''
+    required: false
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
