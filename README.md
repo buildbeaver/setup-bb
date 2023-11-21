@@ -1,40 +1,43 @@
-# setup-bb
+# GitHub Action for BuildBeaver: setup-bb
 
-This action provides the following for GitHub Actions users:
-- Downloading requested BB CLI and adding it to the Runner's path
+This GitHub Action provides the following functionality for BuildBeaver users:
+- Downloading `bb` (the BuildBeaver CLI tool) and adding it to the Runner's path
 - Executing `bb run` with arguments.
 
-## Usage
+See [Using BuildBeaver with GitHub Actions](https://buildbeaver.github.io/docs/github-actions/github-actions-intro) for
+usage instructions, and [action.yml](./action.yml) for the available inputs.
 
-see [action.yml](./action.yml)
+BuildBeaver **Tutorials** and **Guides** can be found on the [BuildBeaver Documentation](https://buildbeaver.github.io/) site.
 
-```yaml
-- uses: buildbeaver/setup-bb@v1
-  with:
-    # The version of BB CLI to install
-    # See https://github.com/buildbeaver/bb-cli/releases for available versions
-    # Example: 1.0.0
-    version: ''
+## Basic Usage
 
-    # Set this option to true if you only want to install BB CLI and have it available on the Runners path.
-    # Default: false
-    install-only: false
-
-    # Specify any optional arguments you want to pass into bb run
-    # Default: ''
-    args: ''
-```
-
-### Basic:
+The following workflow YAML will install the default version of BB CLI 
+into your Runner's path and execute `bb run` to build your repo:
 
 ```yaml
+name: BuildBeaver
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build-acme:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
 
-    # Running BB CLI within your repository
+    # Run BB CLI within your repository
     - name: Build using BB CLI
       uses: buildbeaver/setup-bb@main
-      with:
-        version: '1.0.0'
-        args: '-v'
 ```
+
+---
+
+## What is BuildBeaver?
+
+The *BuildBeaver Team* are a group of DevOps and Build System enthusiasts who believe there is a better way to
+define builds and CI/CD pipelines. Better than a complex spaghetti of YAML and scripts that only the Build Expert
+on the team dares to touch.
+
+Our aim is to help you *ship better software, faster* - see the [Dynamic Builds Guide](https://buildbeaver.github.io/docs/category/guide-to-dynamic-builds) for details.
